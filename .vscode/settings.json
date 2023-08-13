@@ -1,3 +1,27 @@
 {
-    "python.pythonPath": "C:\\Python\\Python38\\python.exe"
+  "python.defaultInterpreterPath": "/Users/tebazele/Source/Projects/python-vue-spa-boilerplate/backend/venv/bin/python3",
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#ccefc3",
+    "activityBar.background": "#ccefc3",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#8194dd",
+    "activityBarBadge.foreground": "#15202b",
+    "commandCenter.border": "#15202b99",
+    "sash.hoverBorder": "#ccefc3",
+    "statusBar.background": "#a9e59a",
+    "statusBar.foreground": "#15202b",
+    "statusBarItem.hoverBackground": "#86db71",
+    "statusBarItem.remoteBackground": "#a9e59a",
+    "statusBarItem.remoteForeground": "#15202b",
+    "titleBar.activeBackground": "#a9e59a",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveBackground": "#a9e59a99",
+    "titleBar.inactiveForeground": "#15202b99"
+  },
+  "peacock.color": "#a9e59a",
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.autopep8"
+  },
+  "python.formatting.provider": "none"
 }
