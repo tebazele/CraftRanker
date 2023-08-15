@@ -2,18 +2,23 @@
 # Author : Andre Baldo (http://github.com/andrebaldo/)
 # The main file for this login service, this will deal with the login process
 # and the login authentication, and logout.
+from services.jsonClassEncoder import JsonClassEncoder
+from services.customSessionInterface import CustomSessionInterface
+from services.auth import Auth
+from models.loginTokenResult import LoginTokenResult
 import flask
 import flask_login
 from flask import request
+from flask_sqlalchemy import SQLAlchemy
 
-from models.loginTokenResult import LoginTokenResult
-from services.auth import Auth
-from services.customSessionInterface import CustomSessionInterface
-from services.jsonClassEncoder import JsonClassEncoder
 
 app = flask.Flask(__name__)
+
+# app.app_context().push()
+
+
 # Configurations
-ALOWED_CORS_DOMAIN = 'http://localhost:8080'
+ALOWED_CORS_DOMAIN = 'http://localhost:8081'
 app.secret_key = 'this will be used to cryptograph sensible data like authentication tokens'
 jsonClassEncoder = JsonClassEncoder()
 
@@ -54,20 +59,22 @@ def register():
 
 
 # this route will login the user and return a Json Web Token, this token
-# will be stored into the client aplication and need to be passed over for each new 
+# will be stored into the client aplication and need to be passed over for each new
 # request, via Authorizaton header.
 @app.route('/token', methods=(['POST']))
 def token():
     authToken = request.headers.get('Authorization')
     activeSession = authModule.GetActiveSession(authToken)
     if activeSession is not None:
-        loginResult = LoginTokenResult(True, 'Login successful', activeSession.jwToken)
+        loginResult = LoginTokenResult(
+            True, 'Login successful', activeSession.jwToken)
         return jsonClassEncoder.encode(loginResult), 200
     else:
         requestPayload = request.get_json()
         username = requestPayload['email']
         password = requestPayload['password']
-        loginResult = authModule.getLoginToken(username, password, app.config['SECRET_KEY'])
+        loginResult = authModule.getLoginToken(
+            username, password, app.config['SECRET_KEY'])
         if loginResult.success == True:
             return jsonClassEncoder.encode(loginResult), 200
         else:
@@ -104,7 +111,7 @@ app.after_request(add_cors_headers)
 # Checks if the user is auhenticated for protected routes decorated with @flask_login.login_required
 @login_manager.request_loader
 def load_user_from_request(request):
-    # Get the token from the Authorization request header 
+    # Get the token from the Authorization request header
     authToken = request.headers.get('Authorization')
     if authToken:
         try:

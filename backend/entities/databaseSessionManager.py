@@ -8,6 +8,7 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+# You don't want to put your database string directly in here because it's secret
 workingDirectory = os.getcwd()
 configFile = os.path.join(workingDirectory, 'config.json')
 
@@ -19,6 +20,7 @@ engine = create_engine(DATABASE_CONNECTION, echo=True)
 
 # create a Session
 Session = sessionmaker(bind=engine)
+
 
 class SessionManager(object):
     def __init__(self):
