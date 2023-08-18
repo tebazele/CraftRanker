@@ -3,6 +3,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
+    // @ts-ignore
     baseURL: process.env.VUE_APP_BASE_API_URL,
 });
 

@@ -1,6 +1,6 @@
 // frontend\src\modules\authentication\authStore.js
 // Author: Author : Andre Baldo (http://github.com/andrebaldo/) 
-import axiosInstance from '@/plugins/connectionBuilder.js'
+import axiosInstance from '../../plugins/connectionBuilder.js'
 
 const authStore = {
     state: {
@@ -56,6 +56,7 @@ const authStore = {
                 });
         },
         authenticateUserAndSetToken({ commit, dispatch }, payload) {
+            console.log("authenticateUserAndSetToken function is running")
             return new Promise(function (resolve, reject) {
                 commit('setIsProcessing', true);
                 let controllerReference = payload.controllerReference;
@@ -65,6 +66,7 @@ const authStore = {
                         commit('setIsProcessing', false);
                         commit('setLogged', { success: true, token: response.data.token, message: "Credentials accepted!" });
                         resolve(controllerReference);
+                        // axiosInstance.defaults.withCredentials = true;
                         axiosInstance.defaults.headers.common['Authorization'] = response.data.token;
                     })
                     .catch(function (error) {

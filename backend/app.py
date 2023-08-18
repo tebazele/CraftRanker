@@ -40,6 +40,8 @@ def load_user(user_id):
 @app.route('/home', methods=(['GET']))
 @flask_login.login_required
 def home():
+    print("You are logged in")
+
     return 'Home protected by @flask_login.login_required'
 
 

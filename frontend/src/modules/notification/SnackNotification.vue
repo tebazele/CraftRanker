@@ -2,14 +2,8 @@
 frontend\src\modules\notification\SnackNotification.vue
 Author: Author : Andre Baldo (http://github.com/andrebaldo/) -->
 <template>
-  <v-snackbar
-    v-model="visibility"
-    :color="colorCondition ? 'success' : 'error'"
-    top
-    :timeout="0"
-    vertical
-  >
-    <span>{{message}}</span>
+  <v-snackbar v-model="visibility" :color="colorCondition ? 'success' : 'error'" top :timeout="-1" vertical>
+    <span>{{ message }}</span>
     <v-btn color="primary" @click.native="setSnackbarVisibility(false)">Close</v-btn>
   </v-snackbar>
 </template>

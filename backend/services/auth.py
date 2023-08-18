@@ -2,6 +2,7 @@
 # Author : Andre Baldo (http://github.com/andrebaldo/)
 # This module deals with the authentication process and authentication checks.
 import bcrypt
+import codecs
 import jwt
 from entities.user import User
 from entities.userSession import UserSession
@@ -12,12 +13,13 @@ from sqlalchemy import and_, or_, update
 from entities.databaseSessionManager import SessionManager
 
 
-
 JWT_EXP_DELTA_SECONDS = 20
 SESSION_TIMEOUT_IN_HOURS = 24
 
+
 class Auth():
     dbSession = SessionManager().session
+
     def register(self, username, password, mobilePhone) -> DefaultMethodResult:
         """
         This method will validate the data and create a new registration
@@ -30,13 +32,14 @@ class Auth():
         # If the error var still set as None, if is None proceed to the user creation
         # But if there is an error set, returns this error to the browser
         if error is None:
-            newUser =  User(username = username, password = password, mobilePhone = mobilePhone)
+            newUser = User(username=username, password=password,
+                           mobilePhone=mobilePhone)
             self.dbSession.add(newUser)
             self.dbSession.commit()
             return DefaultMethodResult(True, 'User Created')
 
         return DefaultMethodResult(False, error)
-        
+
     def validateRegisterData(self, username, password) -> LoginTokenResult:
         """
         Check if the username and password are correct, returns a text error if
@@ -52,9 +55,10 @@ class Auth():
 
         if len(password) < 7:
             error = 'Password length is less than 8.'
-        
+
         # Query our database to check if the username is already registred
-        result = self.dbSession.query(User).filter_by(username=username).first()
+        result = self.dbSession.query(
+            User).filter_by(username=username).first()
         # If the result returns some user sets an error
         if result is not None:
             error = 'User {} is already registered.'.format(username)
@@ -67,6 +71,7 @@ class Auth():
         matches with the one stored into the database, case the credentials
         were accepted a login token is created onto the database and returned.
         """
+        # print(type(password))
         error = None
         # The condition if not checks for None or empty values.
         if not username:
@@ -75,11 +80,13 @@ class Auth():
         elif not password:
             error = 'Password is required.'
         # Query our database to check username exists
-        result = self.dbSession.query(User).filter_by(username=username).first()
+        result = self.dbSession.query(
+            User).filter_by(username=username).first()
         if result is None:
             error = 'Invalid credentials'
         else:
-            if not bcrypt.checkpw(password.encode('utf-8'), result.password.encode('utf-8')):
+
+            if not bcrypt.checkpw(password.encode('utf-8'), result.password):
                 error = 'Invalid credentials'
 
         success = False
@@ -89,9 +96,9 @@ class Auth():
                 'userId': result.userId,
                 'exp': datetime.utcnow() + timedelta(seconds=JWT_EXP_DELTA_SECONDS)
             }
-            jwt_token = jwt.encode(payload, appSecret,algorithm='HS256')
-            #decodedToken = jwt.decode(jwt_token, appSecret, algorithms=['HS256'])
-            jwtDecoded = jwt_token.decode("utf-8")
+            jwt_token = jwt.encode(payload, appSecret, algorithm='HS256')
+            # decodedToken = jwt.decode(jwt_token, appSecret, algorithms=['HS256'])
+            jwtDecoded = jwt_token
             self.createUserSessionOnDatabase(result.userId, jwtDecoded)
             return LoginTokenResult(success, 'login result', jwtDecoded)
         else:
@@ -103,10 +110,10 @@ class Auth():
         kactive until it expires or revoked via logout
         """
         userSession = UserSession(
-            userId = userId,
-            loggedOut = False,
-            loginDate = datetime.now(),
-            expireDate = datetime.now() + timedelta(hours=SESSION_TIMEOUT_IN_HOURS), 
+            userId=userId,
+            loggedOut=False,
+            loginDate=datetime.now(),
+            expireDate=datetime.now() + timedelta(hours=SESSION_TIMEOUT_IN_HOURS),
             jwToken=jwToken
         )
         self.dbSession.add(userSession)
@@ -120,21 +127,23 @@ class Auth():
 
     def GetUserByToken(self, jwt):
         filtered = self.dbSession.query(UserSession).order_by(UserSession.userSessionId).filter(
-           and_(UserSession.jwToken==jwt ,UserSession.expireDate > datetime.now(), UserSession.loggedOut == False)
-           )
+            and_(UserSession.jwToken == jwt, UserSession.expireDate >
+                 datetime.now(), UserSession.loggedOut == False)
+        )
         activeSession = filtered.first()
 
         if activeSession is not None:
             return self.dbSession.query(User).get(activeSession.userId)
         else:
             return None
-    
+
     def SessionLogout(self, jwt, url):
         """
         Sets the session as logged out and set the logoutDate.
         """
         if jwt is not None:
-            currentUserSession = self.dbSession.query(UserSession).filter_by(jwToken=jwt).first()
+            currentUserSession = self.dbSession.query(
+                UserSession).filter_by(jwToken=jwt).first()
             if currentUserSession is not None:
                 if currentUserSession.loggedOut == False:
                     currentUserSession.loggedOut = True
@@ -142,7 +151,7 @@ class Auth():
                     currentUserSession.url = url
                     self.dbSession.commit()
                 return DefaultMethodResult(True, 'Logout completed')
-        
+
         return DefaultMethodResult(False, 'Error trying to logout')
 
     def GetActiveSession(self, jwt):
@@ -150,14 +159,9 @@ class Auth():
         Returns an active login session for the give JWToken, if it exists.
         """
         if jwt is not None:
-            currentUserSession = self.dbSession.query(UserSession).filter_by(jwToken=jwt).first()
+            currentUserSession = self.dbSession.query(
+                UserSession).filter_by(jwToken=jwt).first()
             if currentUserSession is not None:
                 if currentUserSession.loggedOut == False:
                     return currentUserSession
         return None
-
- 
-
-    
-
-      
