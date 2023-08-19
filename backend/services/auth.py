@@ -2,7 +2,6 @@
 # Author : Andre Baldo (http://github.com/andrebaldo/)
 # This module deals with the authentication process and authentication checks.
 import bcrypt
-import codecs
 import jwt
 from entities.user import User
 from entities.userSession import UserSession

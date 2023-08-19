@@ -1,15 +1,16 @@
 # databaseCreation.py
 # Author : Andre Baldo (http://github.com/andrebaldo/)
-# Make sure that you have a SQL Server runing in your local host, check also the instance
-# name, in some instalations the server path will be 'localhost/SQLEXPRESS' in this case,
+# Make sure that you have a SQL Server running in your local host, check also the instance
+# name, in some installations the server path will be 'localhost/SQLEXPRESS' in this case,
 # update the SERVER variable below accordingly
 # This script creates the tables User and UserSession, just execute:$python databaseCreation.py
-# from your command pront, tested just on Windows.
+# from your command promt, tested just on Windows.
 import flask_login
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import json
 import os
+
 
 app = Flask(__name__)
 
@@ -36,7 +37,7 @@ class User(db.Model, flask_login.mixins.UserMixin):
     mobilePhone = db.Column(db.String(80), unique=False, nullable=True)
 
     def get_id(self):
-        return text_type(self.userId)
+        return str(self.userId)
 
 
 class UserSession(db.Model):

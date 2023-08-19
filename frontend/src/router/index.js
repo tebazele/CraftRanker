@@ -2,7 +2,7 @@
 // Author: Author : Andre Baldo (http://github.com/andrebaldo/) 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// @ts-ignore
+
 import Home from '../views/Home.vue'
 import store from '../store/index.js'
 
@@ -15,15 +15,10 @@ const routes = [
     component: Home
   },
   {
-    path: '/home',
-    name: 'homeview',
-    component: () => import('../views/HomeView.vue'),
+    path: '/coursecontent',
+    name: 'CourseContent',
+    component: () => import('../views/CourseContent.vue'),
     meta: {requiresAuth: true}
-  },
-  {
-    path: '/notloggedin',
-    name: 'notLoggedIn',
-    component: () => import('../views/NotLoggedIn.vue')
   },
   {
     path: '/register',
@@ -50,7 +45,7 @@ router.beforeEach((to, from, next) => {
       next()
       return
     }
-    next('/notLoggedIn')
+    next('/login')
   } else {
     next()
   }
