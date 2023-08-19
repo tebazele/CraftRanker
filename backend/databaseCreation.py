@@ -53,5 +53,14 @@ class UserSession(db.Model):
     logoutDate = db.Column(db.DateTime, nullable=True)
 
 
+class Videos(db.Model):
+    __tablename__ = 'Videos'
+
+    videoId = db.Column(db.Integer, primary_key=True)
+    youtubeId = db.Column(db.String(255), nullable=False)
+    name = db.Column(db.String(255), nullable=False)
+    thumbnail = db.Column(db.String(4000), nullable=False)
+
+
 db.create_all()
 db.session.commit()

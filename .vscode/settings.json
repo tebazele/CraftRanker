@@ -1,5 +1,5 @@
 {
-  "python.defaultInterpreterPath": "/Users/tebazele/Source/Projects/python-vue-spa-boilerplate/backend/venv/bin/python3",
+  "python.defaultInterpreterPath": "/Users/tebazele/Source/Projects/CraftRanker/backend/venv/bin/python3",
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#ccefc3",
     "activityBar.background": "#ccefc3",
@@ -22,6 +22,5 @@
   "peacock.color": "#a9e59a",
   "[python]": {
     "editor.defaultFormatter": "ms-python.autopep8"
-  },
-  "python.formatting.provider": "none"
+  }
 }
