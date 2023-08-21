@@ -10,6 +10,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import json
 import os
+# from videodata import videos
 
 
 app = Flask(__name__)
@@ -29,7 +30,9 @@ app.app_context().push()
 
 
 class User(db.Model, flask_login.mixins.UserMixin):
-    __tablename__ = 'User'  # Name of the table in our database
+    __tablename__ = 'User'
+
+    # Name of the table in our database
     # Defining the columns
     userId = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
@@ -55,11 +58,14 @@ class UserSession(db.Model):
 
 class Videos(db.Model):
     __tablename__ = 'Videos'
+    __table_args__ = {'sqlite_autoincrement': True}
 
     videoId = db.Column(db.Integer, primary_key=True)
+    sqlite_autoincrement = True
     youtubeId = db.Column(db.String(255), nullable=False)
     name = db.Column(db.String(255), nullable=False)
-    thumbnail = db.Column(db.String(4000), nullable=False)
+    series = db.Column(db.String(255), nullable=False)
+    module = db.Column(db.Integer, nullable=False)
 
 
 db.create_all()

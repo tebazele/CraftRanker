@@ -18,6 +18,7 @@ with open(configFile, 'r') as jsonConfig:
 DATABASE_CONNECTION = config['database_connection_string']
 engine = create_engine(DATABASE_CONNECTION, echo=True)
 
+
 # create a Session
 Session = sessionmaker(bind=engine)
 

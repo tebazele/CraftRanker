@@ -128,7 +128,7 @@ const authStore = {
             return state.isProcessing;
         },
         getIsUserLoggedIn(state) {
-
+            // console.log(state.isUserLoggedIn)
             if (state.isUserLoggedIn === false) {
                 if (sessionStorage.loginToken) {
                     return true;

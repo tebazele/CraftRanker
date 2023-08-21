@@ -5,6 +5,7 @@
 from services.jsonClassEncoder import JsonClassEncoder
 from services.customSessionInterface import CustomSessionInterface
 from services.auth import Auth
+
 from models.loginTokenResult import LoginTokenResult
 import flask
 import flask_login
@@ -126,6 +127,19 @@ def load_user_from_request(request):
             # If it can't find an active session returns None,
     # this will cause the request decorated with @flask_login.login_required been denied
     return None
+
+# @app.route('/coursecontent', methods=(['POST']))
+# def addVideoData():
+#     requestPayload = request.get_json()
+#     username = requestPayload['email']
+#     password = requestPayload['password']
+#     mobilePhone = requestPayload['mobilePhone']
+
+#     registerResult = authModule.register(username, password, mobilePhone)
+#     if registerResult.success == True:
+#         return jsonClassEncoder.encode(registerResult), 200
+#     else:
+#         return jsonClassEncoder.encode(registerResult), 500
 
 
 if __name__ == '__main__':
