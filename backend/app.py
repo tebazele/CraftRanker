@@ -20,7 +20,7 @@ app = flask.Flask(__name__)
 
 # Configurations
 ALOWED_CORS_DOMAIN = 'http://localhost:8081'
-app.secret_key = 'this will be used to cryptograph sensible data like authentication tokens'
+app.secret_key = 'asd;lj34asd9fa;l;3'
 jsonClassEncoder = JsonClassEncoder()
 
 login_manager = flask_login.LoginManager()
@@ -52,9 +52,9 @@ def register():
     requestPayload = request.get_json()
     username = requestPayload['email']
     password = requestPayload['password']
-    mobilePhone = requestPayload['mobilePhone']
+    fullName = requestPayload['fullName']
 
-    registerResult = authModule.register(username, password, mobilePhone)
+    registerResult = authModule.register(username, password, fullName)
     if registerResult.success == True:
         return jsonClassEncoder.encode(registerResult), 200
     else:
@@ -66,22 +66,27 @@ def register():
 # request, via Authorizaton header.
 @app.route('/token', methods=(['POST']))
 def token():
+
     authToken = request.headers.get('Authorization')
     activeSession = authModule.GetActiveSession(authToken)
     if activeSession is not None:
         loginResult = LoginTokenResult(
             True, 'Login successful', activeSession.jwToken)
         return jsonClassEncoder.encode(loginResult), 200
+        # return "This function is working", 200
     else:
         requestPayload = request.get_json()
         username = requestPayload['email']
         password = requestPayload['password']
         loginResult = authModule.getLoginToken(
             username, password, app.config['SECRET_KEY'])
+
         if loginResult.success == True:
             return jsonClassEncoder.encode(loginResult), 200
+            # return "This is working", 200
         else:
             return jsonClassEncoder.encode(loginResult), 401
+            # return "This isn't working ", 401
 
 
 # This will invalidate the user current user session on the server

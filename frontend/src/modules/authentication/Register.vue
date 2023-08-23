@@ -19,8 +19,8 @@ Author: Author : Andre Baldo (http://github.com/andrebaldo/) -->
           </template>
         </v-text-field>
 
-        <v-text-field name="mobilePhone" label="Mobile Phone" id="mobilePhone" v-model="mobilePhone"
-          prepend-icon="mdi-phone" type="tel"></v-text-field>
+        <v-text-field name="fullName" label="Name" id="fullName" v-model="fullName" prepend-icon="mdi-emoticon"
+          type="string"></v-text-field>
 
         <div class="text-center">
           <v-progress-circular indeterminate color="primary" v-if="isProcessing"></v-progress-circular>
@@ -31,7 +31,7 @@ Author: Author : Andre Baldo (http://github.com/andrebaldo/) -->
       <router-link to="login">Go to login</router-link>
       <v-spacer></v-spacer>
       <v-btn color="success" :disabled="!isRegisterFormValid || isProcessing || GetIsSnackbarVisible"
-        @click="registerNewUser({ email: email, password: password, mobilePhone: mobilePhone })">
+        @click="registerNewUser({ email: email, password: password, fullName: fullName })">
         <v-icon left>mdi-account-plus</v-icon>Register
       </v-btn>
       <SnackNotification v-bind:visibility="GetIsSnackbarVisible" v-bind:colorCondition="getIsRegistrationProcessSucceed"
@@ -52,7 +52,7 @@ export default {
       isRegisterFormValid: false,
       email: "",
       password: "",
-      mobilePhone: ""
+      fullName: ""
     };
   },
   methods: {

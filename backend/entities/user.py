@@ -9,10 +9,10 @@ db = SQLAlchemy()
 
 class User(db.Model, flask_login.mixins.UserMixin):
     __tablename__ = 'User'
-    __table_args__ = {'sqlite_autoincrement': True}
+
     # Name of the table in our database
     # Defining the columns
-    id = db.Column(db.Integer, primary_key=True)
+    userId = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     createdAt = db.Column(db.DateTime, nullable=False)
     password = db.Column(db.String(120), unique=False, nullable=False)

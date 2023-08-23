@@ -42,7 +42,7 @@ export default {
       isLoginFormValid: false,
       email: "",
       password: "",
-      mobilePhone: ""
+      fullName: ""
     };
   },
   methods: {
@@ -74,7 +74,7 @@ export default {
       var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
       return (
         re.test(String(email).toLowerCase()) ||
-        "Oops, this doesn't looks like rigth, can you check please?"
+        "Oops, this doesn't looks like right, can you check please?"
       );
     },
     login(loginData) {
