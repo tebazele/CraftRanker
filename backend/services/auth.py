@@ -19,7 +19,7 @@ SESSION_TIMEOUT_IN_HOURS = 24
 class Auth():
     dbSession = SessionManager().session
 
-    def register(self, username, password, mobilePhone) -> DefaultMethodResult:
+    def register(self, username, createdAt, password, fullName) -> DefaultMethodResult:
         """
         This method will validate the data and create a new registration
         into our database.
@@ -31,8 +31,8 @@ class Auth():
         # If the error var still set as None, if is None proceed to the user creation
         # But if there is an error set, returns this error to the browser
         if error is None:
-            newUser = User(username=username, password=password,
-                           mobilePhone=mobilePhone)
+            newUser = User(username=username, password=password, createdAt=createdAt,
+                           fullName=fullName)
             self.dbSession.add(newUser)
             self.dbSession.commit()
             return DefaultMethodResult(True, 'User Created')
