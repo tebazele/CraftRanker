@@ -56,15 +56,9 @@ export default {
 
 
 <style lang="scss" scoped>
-@import "./assets/scss/main.scss";
-
-:root {
-  --main-height: calc(100vh - 32px - 64px);
+main {
+  min-height: 40vh;
 }
 
-footer {
-  display: grid;
-  place-content: center;
-
-}
+// footer {}
 </style>
