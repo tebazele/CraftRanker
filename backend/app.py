@@ -35,6 +35,10 @@ authModule = Auth()
 def load_user(user_id):
     return authModule.load_user(user_id)
 
+# This is a dummy route to test things like uwsgi/nginx/etc
+@app.route('/sexybeast')
+def sexybeast():
+    return 'Jeanne'
 
 # Only requests that have an Authorization request reader set with a valid login token
 # can access the protected routes, like this '/home' one for example
