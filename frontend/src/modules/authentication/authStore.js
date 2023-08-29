@@ -17,6 +17,7 @@ const authStore = {
             state.loginToken = loginResult.token;
             state.loginProcessMessage = loginResult.message;
             if (loginResult.success) {
+                // NOTE this sets the loginToken into sessionStorage
                 sessionStorage.loginToken = loginResult.token;
             } else {
                 sessionStorage.removeItem("loginToken");
@@ -56,7 +57,8 @@ const authStore = {
                 });
         },
         authenticateUserAndSetToken({ commit, dispatch }, payload) {
-            console.log("authenticateUserAndSetToken function is running")
+            // payload is object with email and password
+            console.log("authenticateUserAndSetToken function is running", payload)
             return new Promise(function (resolve, reject) {
                 commit('setIsProcessing', true);
                 let controllerReference = payload.controllerReference;
@@ -64,6 +66,8 @@ const authStore = {
                 axiosInstance.post('token', payload)
                     .then(function (response) {
                         commit('setIsProcessing', false);
+                        // NOTE this code stores the login token on the front end to send back and forth in request headers 
+                        // FIXME does this mean the login ends when the browser is closed?
                         commit('setLogged', { success: true, token: response.data.token, message: "Credentials accepted!" });
                         resolve(controllerReference);
                         // axiosInstance.defaults.withCredentials = true;
@@ -86,6 +90,7 @@ const authStore = {
             commit('setIsSnackbarVisible', isVisible);
         },
         logout({ commit }, payload) {
+            console.log("logout function running", payload);
             return new Promise(function (resolve, reject) {
                 let controllerReference = payload.controllerReference;
                 delete (payload.controllerReference);

@@ -95,6 +95,7 @@ class Auth():
                 'userId': result.userId,
                 'exp': datetime.utcnow() + timedelta(seconds=JWT_EXP_DELTA_SECONDS)
             }
+            # NOTE this is where the token is originally generated
             jwt_token = jwt.encode(payload, appSecret, algorithm='HS256')
             # decodedToken = jwt.decode(jwt_token, appSecret, algorithms=['HS256'])
             jwtDecoded = str(jwt_token, encoding='utf-8')

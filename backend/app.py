@@ -19,7 +19,7 @@ app = flask.Flask(__name__)
 
 
 # Configurations
-ALOWED_CORS_DOMAIN = 'http://localhost:8081'
+ALOWED_CORS_DOMAIN = 'http://localhost:5173'
 app.secret_key = 'asd;lj34asd9fa;l;3'
 jsonClassEncoder = JsonClassEncoder()
 
@@ -92,6 +92,7 @@ def token():
 # This will invalidate the user current user session on the server
 @app.route('/logout', methods=(['POST']))
 def sessionLogout():
+
     authToken = request.headers.get('Authorization')
     logoutResult = authModule.SessionLogout(authToken, request.url)
     if logoutResult.success == True:
