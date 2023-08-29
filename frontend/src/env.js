@@ -1,1 +1,2 @@
-export const baseURL = 'http://127.0.0.1:5000'
+export const dev = window.location.origin.includes('localhost')
+export const baseURL = dev ? 'https://localhost:5000' : ''
