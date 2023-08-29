@@ -1,31 +1,29 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-body-tertiary bg-header p-5">
     <div class="d-flex flex-column">
-      <img alt="logo" src="../assets/img/crLogoSquare.svg" height="120" />
+      <router-link :to="{ name: 'home' }">
+        <img alt="logo" src="../assets/img/crLogoSquare.svg" height="120" />
+      </router-link>
     </div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        <li class="nav-item mx-3">
+          <router-link class="text-uppercase text-dark link" :to="{ name: 'courseContent' }">
+            Etsy Courses
+          </router-link>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+        <li class="nav-item mx-3">
+          <router-link class="text-uppercase text-dark link" :to="{ name: 'about' }">
+            About Us
+          </router-link>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
+        <li v-if="!isToken" class="nav-item mx-3">
+          <router-link class="text-uppercase text-dark link" :to="{ name: 'login' }">
+            Login
+          </router-link>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+        <li v-else class="nav-item mx-3">
+          <button class="btn btn-secondary" @click="logout()">Logout</button>
         </li>
       </ul>
       <form class="d-flex" role="search">
@@ -38,10 +36,27 @@
 
 
 <script>
-// import { computed, reactive, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+
+import { useAuthStore } from '../stores/auth.js';
+import { computed } from 'vue';
 export default {
   setup() {
-    return {}
+    const authStore = useAuthStore();
+    const router = useRouter();
+    return {
+      authStore,
+      async logout() {
+        try {
+          await authStore.logout()
+          router.push({ name: 'login' })
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      isToken: computed(() => authStore.getIsUserLoggedIn)
+
+    }
   }
 };
 </script>
@@ -52,5 +67,9 @@ export default {
   background-image: url('../assets/img/headerLongDarker.jpg');
   background-position: center;
   background-size: cover;
+}
+
+.link {
+  text-decoration: none !important;
 }
 </style>

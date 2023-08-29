@@ -26,14 +26,14 @@ export const useAuthStore = defineStore('auth', {
     // getLoginProcessMessage: (state) => state.loginProcessMessage,
     // isProcessing: (state) => state.isProcessing,
     getIsUserLoggedIn: (state) => {
-      const sessionsStorage = Window.sessionsStorage
-      if (state.isUserLoggedIn === false) {        
-        if (sessionsStorage.getItem('loginToken')) {
-          return true;
+      if (!state.isUserLoggedIn) {
+        if (sessionStorage.loginToken) {
+          return true
         }
-        return false;
+        return false
       }
-      return true;
+      return true
+
     }
   },
   actions: {
@@ -96,7 +96,7 @@ export const useAuthStore = defineStore('auth', {
     },
     async authenticateUserAndSetToken(payload) {
       try {
-        console.log("this is the payload on the authenticateUserAndSetToken function", payload);
+        // console.log("this is the payload on the authenticateUserAndSetToken function", payload);
         this.isProcessing = true;
         const res = await api.post('token', payload);
         console.log(res.data);
@@ -124,17 +124,17 @@ export const useAuthStore = defineStore('auth', {
         // console.error(error);
       }
     },
-    async logout(payload) {
+    async logout() {
       try {
-        await api.post('logout', payload);
+        await api.post('logout');
         this.setIsProcessing(false)
         this.setLogout()
       } catch (error) {
         this.setIsProcessing(false)
         if (typeof error != 'undefined' && typeof error.response != 'undefined') {
-                            this.setLogout();
-                        } else {
-                            this.setLogout();
+           this.setLogout();
+        } else {
+          this.setLogout();
                         }
         console.error(error)
       }

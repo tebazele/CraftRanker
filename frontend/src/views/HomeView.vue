@@ -3,7 +3,7 @@
   <section class="row">
     <div class="col-12 text-center ">
       <h1 class="text-dark text-uppercase">Learn from real top-1% etsy sellers</h1>
-      <h4 class="text-secondary">No guesswork. No BW. Just proven strategies for success on Etsy</h4>
+      <h4 class="text-secondary">No guesswork. No BS. Just proven strategies for success on Etsy</h4>
     </div>
   </section>
   <section class="row justify-content-center">
