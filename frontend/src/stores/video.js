@@ -8,12 +8,14 @@ export const useVideoStore = defineStore('video', {
 
   }),
   getters: {
+    // NOTE accessing the state like this acts like a computed
     videosDB(state) {
+     
       return state.videos
     }
+    // TODO write getters that filter videos by module
   },
   actions: {
-
     async getVideos() {
       try {
         const res = await api.get('/videos')

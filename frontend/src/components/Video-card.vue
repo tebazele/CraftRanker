@@ -1,25 +1,27 @@
 <template>
-  <div>
-    This is the video card
-    <p>{{ video?.name }}</p>
+  <div class="video-thumbnail">
+
+    <h3>{{ video?.name }}</h3>
+    <hr />
+    <LiteYouTubeEmbed :id="video?.youtubeId" :title="video?.name" rel="prefetch" />
+
   </div>
 </template>
 
 
-<script>
+<script setup>
+import LiteYouTubeEmbed from 'vue-lite-youtube-embed'
+import 'vue-lite-youtube-embed/style.css'
 
-export default {
-  props: {
-    video: {
-      type: Object,
-      required: true
-    }
-  },
-  setup() {
-    return {}
-  }
-};
+const props = defineProps({
+  video: Object
+})
 </script>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.video-thumbnail {
+  max-width: 500px;
+
+}
+</style>

@@ -25,5 +25,11 @@ class VideoData():
         self.dbSession.flush()
         self.dbSession.commit()
 
+    def removeAllVideos(self):
+        num_of_rows_deleted = self.dbSession.query(Video).delete()
+        # FIXME also remove auto sequenced Ids somehow so IDs start again at 1 when the video data is reinserted
+        # print(num_of_rows_deleted)
+        self.dbSession.commit()
+
     def getVideos(self):
         return self.dbSession.query(Video).all()
