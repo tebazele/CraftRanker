@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-// FIXME why can't I access the store from my router?
 import { useAuthStore } from '../stores/auth.js'
 
 const router = createRouter({
@@ -10,6 +9,16 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: () => import('../views/AboutView.vue'),
+    },
+    {
+      path: '/contact',
+      name: 'contact',
+      component: () => import('../views/ContactView.vue'),
     },
     {
       path: '/coursecontent',
@@ -41,6 +50,7 @@ const router = createRouter({
 
 
 router.beforeEach((to) => {
+  // NOTE must declare instance of store after router has been set up
   const authStore = useAuthStore();
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!authStore.getIsUserLoggedIn)  

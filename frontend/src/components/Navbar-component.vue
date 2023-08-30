@@ -17,19 +17,22 @@
             About Us
           </router-link>
         </li>
+        <li class="nav-item mx-3">
+          <router-link class="text-uppercase text-dark link" :to="{ name: 'contact' }">
+            Contact
+          </router-link>
+        </li>
         <li v-if="!isToken" class="nav-item mx-3">
           <router-link class="text-uppercase text-dark link" :to="{ name: 'login' }">
             Login
           </router-link>
         </li>
         <li v-else class="nav-item mx-3">
-          <button class="btn btn-secondary" @click="logout()">Logout</button>
+          <a class="text-dark text-uppercase link" href="#" @click="logout()">Logout</a>
         </li>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      <!-- TODO make purchase page and connect stripe, set up register page to be accessible only after payment confirmed -->
+      <!-- <button class="btn btn-info">GET MASTERCLASSES NOW!</button> -->
     </div>
   </nav>
 </template>

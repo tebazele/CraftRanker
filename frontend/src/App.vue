@@ -38,7 +38,7 @@
           <p>
             Disclaimer: Etsy is a trademark of Etsy, Inc.
             This content is not created or endorsed by Etsy, Inc.
-            All Rights Reserved 2022 © Copyright CraftRanker
+            All Rights Reserved 2023 © Copyright CraftRanker
           </p>
         </div>
       </section>
