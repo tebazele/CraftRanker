@@ -15,11 +15,11 @@
               This is the navigation area based on module
               Two dropdowns, one for each series
               with module numbers.
-              <button class="btn btn-secondary btn-w" type="button" data-bs-toggle="collapse" data-bs-target="#essentials"
-                aria-expanded="false" aria-controls="essentials">
+              <button class="btn btn-secondary btn-w mb-1" type="button" data-bs-toggle="collapse"
+                data-bs-target="#essentials" aria-expanded="false" aria-controls="essentials">
                 Etsy Essentials
               </button>
-              <div class="collapse" id="essentials">
+              <div class="collapse mb-3" id="essentials">
 
                 <ul class="list-group">
                   <li class="list-group-item" :class="isActive ? 'active' : ''" aria-current="true">Module 1: Setting Up
@@ -32,20 +32,21 @@
                 </ul>
 
               </div>
-              <button class="btn btn-secondary btn-w" type="button" data-bs-toggle="collapse" data-bs-target="#expert"
-                aria-expanded="false" aria-controls="expert">
-                Etsy Essentials
+              <button class="btn btn-secondary btn-w mt-3 mb-1" type="button" data-bs-toggle="collapse"
+                data-bs-target="#expert" aria-expanded="false" aria-controls="expert">
+                Etsy Expert
               </button>
               <div class="collapse" id="expert">
 
                 <ul class="list-group">
-                  <li class="list-group-item" :class="isActive ? 'active' : ''" aria-current="true">Module 1: Setting Up
-                    Your Shop</li>
-                  <li class="list-group-item">Module 2: Listings</li>
-                  <li class="list-group-item">Module 3: Product Photography & Shop Images</li>
-                  <li class="list-group-item">Module 4: Pricing, Product Fulfillment, & Shipping</li>
-                  <li class="list-group-item">Module 5: Customer Service</li>
-                  <li class="list-group-item">Module 6: Bonus - Stats & Marketing</li>
+                  <li class="list-group-item" aria-current="true">Module 1: Marketing,
+                    Advertising, Sales, & Promotional Strategies</li>
+                  <li class="list-group-item">Module 2: Advanced Branding & Marketing Tactics</li>
+                  <li class="list-group-item">Module 3: Data Analytics, Keeping Sales High, & Moving Off Etsy's Platform
+                  </li>
+                  <li class="list-group-item">Module 4: Profit Margins & Scaling</li>
+                  <li class="list-group-item">Module 5: Troubleshooting All Things Etsy</li>
+
                 </ul>
 
               </div>
