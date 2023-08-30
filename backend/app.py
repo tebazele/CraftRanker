@@ -5,12 +5,13 @@
 from services.jsonClassEncoder import JsonClassEncoder
 from services.customSessionInterface import CustomSessionInterface
 from services.auth import Auth
-
+from services.videoinsert import VideoData
 from models.loginTokenResult import LoginTokenResult
 import flask
 import flask_login
 from flask import request
 from flask_sqlalchemy import SQLAlchemy
+import json
 
 
 app = flask.Flask(__name__)
@@ -29,6 +30,7 @@ app.session_interface = CustomSessionInterface()
 # End of Configurations section
 
 authModule = Auth()
+videoModule = VideoData()
 
 
 @login_manager.user_loader
@@ -36,12 +38,16 @@ def load_user(user_id):
     return authModule.load_user(user_id)
 
 # This is a dummy route to test things like uwsgi/nginx/etc
+
+
 @app.route('/sexybeast')
 def sexybeast():
     return 'Jeanne'
 
 # Only requests that have an Authorization request reader set with a valid login token
 # can access the protected routes, like this '/home' one for example
+
+
 @app.route('/coursecontent', methods=(['GET']))
 @flask_login.login_required
 def home():
@@ -50,7 +56,16 @@ def home():
     return 'Home protected by @flask_login.login_required'
 
 
+@app.route('/videos', methods=(['GET']))
+# @flask_login.login_required
+def getVideos():
+    vids = videoModule.getVideos()
+    vids_as_dicts = [vid.get_as_dict() for vid in vids]
+    return json.dumps(vids_as_dicts), 200
+
 # Sets the route for this endpoint, this will configure our web server to receive requests at this path.
+
+
 @app.route('/register', methods=(['POST']))
 def register():
     requestPayload = request.get_json()

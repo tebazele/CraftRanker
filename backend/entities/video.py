@@ -3,6 +3,7 @@
 # Defines the Video Information data model
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, ForeignKey, Integer, String, DateTime, Boolean
+import json
 
 
 class Video(SQLAlchemy().Model):
@@ -14,3 +15,15 @@ class Video(SQLAlchemy().Model):
     name = Column(String(255), nullable=False)
     series = Column(String(255), nullable=False)
     module = Column(Integer, nullable=False)
+
+    def __repr__(self):
+        return "<Video(youtubeId='%s', name='%s', series='%s', module='%d')" % (self.youtubeId, self.name, self.series, self.module)
+
+    def get_as_dict(self):
+        return {
+            'videoId': self.videoId,
+            'youtubeId': self.youtubeId,
+            'name': self.name,
+            'series': self.series,
+            'module': self.module,
+        }

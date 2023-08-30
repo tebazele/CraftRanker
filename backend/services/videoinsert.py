@@ -1,5 +1,8 @@
 from entities.databaseSessionManager import SessionManager
 from entities.video import Video
+from models.defaultMethodResult import DefaultMethodResult
+# from sqlalchemy import query
+import json
 
 
 class VideoData():
@@ -21,3 +24,6 @@ class VideoData():
         self.dbSession.delete(video1)
         self.dbSession.flush()
         self.dbSession.commit()
+
+    def getVideos(self):
+        return self.dbSession.query(Video).all()
