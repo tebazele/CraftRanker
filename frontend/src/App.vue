@@ -1,45 +1,49 @@
 <template>
-  <header class="sticky-top">
-    <NavbarComponent />
-  </header>
-  <main>
-    <router-view />
-  </main>
-  <footer>
+  <div>
 
-    <section class="row justify-content-center">
-      <div class="col-12 col-md-5 text-center pt-5">
 
-        <img src="./assets/img/crLogoSquare.svg" height="120" />
-      </div>
+    <header class="sticky-top">
+      <NavbarComponent />
+    </header>
+    <main>
+      <router-view />
+    </main>
+    <footer>
 
-    </section>
-    <section class="row justify-content-center">
+      <section class="row justify-content-center">
+        <div class="col-12 col-md-5 text-center pt-5">
 
-      <div class="col-12 text-center">
+          <img src="./assets/img/crLogoSquare.svg" height="120" />
+        </div>
 
-        <h6 class="text-uppercase">
-          <router-link :to="{ name: 'home' }">
-            <span>
-              terms of service
-            </span>
-          </router-link> |
-          <router-link :to="{ name: 'home' }">
-            <span>
-              Privacy policy
-            </span>
-          </router-link>
-        </h6>
-      </div>
-      <div class="col-6 col-md-4 text-center">
-        <p>
-          Disclaimer: Etsy is a trademark of Etsy, Inc.
-          This content is not created or endorsed by Etsy, Inc.
-          All Rights Reserved 2022 © Copyright CraftRanker
-        </p>
-      </div>
-    </section>
-  </footer>
+      </section>
+      <section class="row justify-content-center">
+
+        <div class="col-12 text-center">
+
+          <h6 class="text-uppercase">
+            <router-link :to="{ name: 'home' }">
+              <span>
+                terms of service
+              </span>
+            </router-link> |
+            <router-link :to="{ name: 'home' }">
+              <span>
+                Privacy policy
+              </span>
+            </router-link>
+          </h6>
+        </div>
+        <div class="col-6 col-md-4 text-center">
+          <p>
+            Disclaimer: Etsy is a trademark of Etsy, Inc.
+            This content is not created or endorsed by Etsy, Inc.
+            All Rights Reserved 2022 © Copyright CraftRanker
+          </p>
+        </div>
+      </section>
+    </footer>
+  </div>
 </template>
 
 

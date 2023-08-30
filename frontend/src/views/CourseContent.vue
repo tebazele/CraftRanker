@@ -1,16 +1,26 @@
 <template>
   <div>
-    This is the course content page
+    {{ videoStore.videos }}
 
   </div>
 </template>
 
 
 <script>
+import { onMounted } from 'vue';
+import { useVideoStore } from '../stores/video.js';
+import { computed } from 'vue'
 
 export default {
   setup() {
-    return {}
+    const videoStore = useVideoStore();
+    onMounted(() => {
+      videoStore.getVideos()
+    })
+
+    return {
+      videoStore
+    }
   }
 };
 </script>

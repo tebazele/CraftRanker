@@ -57,10 +57,11 @@ def home():
 
 
 @app.route('/videos', methods=(['GET']))
-# @flask_login.login_required
+@flask_login.login_required
 def getVideos():
     vids = videoModule.getVideos()
     vids_as_dicts = [vid.get_as_dict() for vid in vids]
+    # json.dumps turns a list of dictionaries into json
     return json.dumps(vids_as_dicts), 200
 
 # Sets the route for this endpoint, this will configure our web server to receive requests at this path.

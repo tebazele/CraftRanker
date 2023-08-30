@@ -20,6 +20,9 @@ class Video(SQLAlchemy().Model):
         return "<Video(youtubeId='%s', name='%s', series='%s', module='%d')" % (self.youtubeId, self.name, self.series, self.module)
 
     def get_as_dict(self):
+        # NOTE this is a python debugger
+        # import ipdb
+        # ipdb.set_trace()
         return {
             'videoId': self.videoId,
             'youtubeId': self.youtubeId,
