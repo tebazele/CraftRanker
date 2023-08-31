@@ -8,7 +8,8 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item mx-3">
-          <router-link class="text-uppercase text-dark link" :to="{ name: 'courseContent' }">
+          <router-link class="text-uppercase text-dark link"
+            :to="{ name: 'courseContent', query: { series: 'Essentials', module: 1 } }">
             Etsy Courses
           </router-link>
         </li>
@@ -20,6 +21,11 @@
         <li class="nav-item mx-3">
           <router-link class="text-uppercase text-dark link" :to="{ name: 'contact' }">
             Contact
+          </router-link>
+        </li>
+        <li class="nav-item mx-3">
+          <router-link class="text-uppercase text-dark link" :to="{ name: 'register' }">
+            Register
           </router-link>
         </li>
         <li v-if="!isToken" class="nav-item mx-3">

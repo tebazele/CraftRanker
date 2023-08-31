@@ -77,7 +77,8 @@ export const useAuthStore = defineStore('auth', {
         this.setRegistrationStatus({
           success: true,
           message: response.data.message
-        });      
+        }); 
+           
       } catch (error) {
         this.isProcessing = false;
         if (typeof error != 'undefined' && typeof error.response != 'undefined') {

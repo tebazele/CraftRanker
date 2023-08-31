@@ -49,7 +49,7 @@ export default {
           // console.log(loginData);
           await authStore.authenticateUserAndSetToken(loginData);
           formData.value = {}
-          router.push({ name: 'courseContent' })
+          router.push({ name: 'courseContent', query: { series: 'Essentials', module: 1 } })
 
         } catch (error) {
           console.log(error);
