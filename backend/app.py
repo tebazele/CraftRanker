@@ -20,7 +20,7 @@ app = flask.Flask(__name__)
 
 
 # Configurations
-ALOWED_CORS_DOMAIN = 'http://localhost:5173'
+ALOWED_CORS_DOMAIN = 'http://127.0.0.1:5173'
 app.secret_key = 'asd;lj34asd9fa;l;3'
 jsonClassEncoder = JsonClassEncoder()
 
@@ -31,6 +31,8 @@ app.session_interface = CustomSessionInterface()
 
 authModule = Auth()
 videoModule = VideoData()
+with app.app_context():
+    from services.mail import mail
 
 
 @login_manager.user_loader

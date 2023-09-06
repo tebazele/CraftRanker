@@ -170,8 +170,9 @@ server {
 
 	location / {
 		alias /var/www/CraftRanker/frontend/dist/;
+		try_files $uri $uri/ /index.html;
 	}
-	location ~ ^/(sexybeast|register|token|logout|coursecontent) {    # FIXME: PREFIX TO /api/
+	location ~ ^/(sexybeast|register|token|logout|coursecontent|videos) {    # FIXME: PREFIX TO /api/
 		include uwsgi_params;
 		uwsgi_pass 127.0.0.1:7000;
 	}

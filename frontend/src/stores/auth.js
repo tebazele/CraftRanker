@@ -125,6 +125,14 @@ export const useAuthStore = defineStore('auth', {
         // console.error(error);
       }
     },
+    async resetPassword(body) {
+      try {
+        const res = await api.post('reset', body)
+        console.log(res.data)
+      } catch (error) {
+        console.error(error)
+      }
+    },
     async logout() {
       try {
         await api.post('logout');

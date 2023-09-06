@@ -123,7 +123,10 @@ class Auth():
         return self.dbSession.query(User).get(int(user_id))
 
     def GetUserByEmail(self, email):
-        return self.dbSession.query(User).filter_by(username=email).first()
+        my_user = self.dbSession.query(User).filter_by(username=email).first()
+        return {"userId": my_user.userId,
+                "username": my_user.username,
+                "fullName": my_user.fullName}
 
     def GetUserByToken(self, jwt):
         filtered = self.dbSession.query(UserSession).order_by(UserSession.userSessionId).filter(
@@ -165,3 +168,13 @@ class Auth():
                 if currentUserSession.loggedOut == False:
                     return currentUserSession
         return None
+
+    def changePassword(self, password, user):
+        """
+        allows for password reset
+        """
+        # find user by username
+        # encrypt new password
+        # update password
+        print(user)
+        print(password)

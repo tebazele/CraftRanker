@@ -94,7 +94,7 @@ import { useRoute, useRouter } from 'vue-router';
 
 
 export default {
-  components: { VideoCard, VideoCard },
+  components: { VideoCard },
   setup() {
     const route = useRoute()
     const router = useRouter()

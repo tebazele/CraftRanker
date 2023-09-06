@@ -14,15 +14,10 @@
           </div>
           <div class="d-flex justify-content-end">
             <button class="btn btn-secondary">Login</button>
+            <button class="btn" type="button" @click="goToReset()">Forgot Password?</button>
           </div>
         </form>
       </div>
-      <!-- <div>
-        <form @submit.prevent="logSomething()">
-          <input v-model="formData.string" />
-          <button>Go</button>
-        </form>
-      </div> -->
     </div>
   </section>
 </template>
@@ -54,11 +49,11 @@ export default {
         } catch (error) {
           console.log(error);
         }
+      },
+      goToReset() {
+        router.push({ name: 'reset' })
       }
-      // ,
-      // logSomething() {
-      //   authStore.logSomething(formData.value.string)
-      // }
+
     }
   }
 };
