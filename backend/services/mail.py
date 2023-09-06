@@ -30,25 +30,33 @@ def reset():
     email = requestPayload['email']
     # Go find the person in the database by their email
     our_user = authModule.GetUserByEmail(email)
-
-    # print("This is our user", our_user)
+    reset_token = authModule.getResetToken(
+        our_user["username"], current_app.config['SECRET_KEY'])
+    # print("This is our token", reset_token)
 
     msg = Message("Reset Your Password for University of Etsy Courses, CraftRanker",
                   recipients=[email],
-                  html=render_template('reset_email.html', user=our_user["fullName"], token="2jd9lk"))
-    # mail.send(msg)
+                  html=render_template('reset_email.html', user=our_user["fullName"], token=reset_token))
+    mail.send(msg)
     return jsonify(status_code=200, content={"message": "email has been sent"})
 
 
 @current_app.route('/verified/<token>/<user>', methods=(['GET', 'POST']))
 def verified(token, user):
     # If this route is hit (when someone clicks on the link in their email), return the jinja template allowing them to reset their password
+    appSecret = current_app.config['SECRET_KEY']
+    user = authModule.verify_reset_token(token, appSecret)
+    if not user:
+        # FIXME redirect to page that says your password reset link has expired go to login
+        return redirect('http://127.0.0.1:5173', code=302)
+        # print(user)
     # domain = ''
     # if debug:
     #     domain = 'http://127.0.0.1:5173'
     password = request.form.get('password')
     if password:
-        authModule.changePassword(password, user)
+        str = authModule.changePassword(password, user)
+        print(str)
         # if debug, return hardcoded url
         # return redirect(domain + '/login', code=302)
         return redirect('http://127.0.0.1:5173/login', code=302)

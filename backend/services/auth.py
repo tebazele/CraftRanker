@@ -3,6 +3,8 @@
 # This module deals with the authentication process and authentication checks.
 import bcrypt
 import jwt
+from time import time
+from datetime import datetime, timedelta
 from entities.user import User
 from entities.userSession import UserSession
 from models.defaultMethodResult import DefaultMethodResult
@@ -104,6 +106,18 @@ class Auth():
         else:
             return LoginTokenResult(False, error, '')
 
+    def getResetToken(self, username, appSecret):
+        return jwt.encode({'reset_password': username, 'exp': datetime.utcnow() + timedelta(minutes=20)}, key=appSecret)
+
+    def verify_reset_token(self, token, appSecret):
+        try:
+            username = jwt.decode(token, key=appSecret)['reset_password']
+            # print(username)
+        except Exception as e:
+            print("[ERROR]", e)
+            return
+        return self.GetUserByEmail(username)
+
     def createUserSessionOnDatabase(self, userId, jwToken):
         """
         Adds a new register into UserSession table to keep the user session 
@@ -173,8 +187,12 @@ class Auth():
         """
         allows for password reset
         """
-        # find user by username
+        password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+        # find user
         # encrypt new password
         # update password
-        print(user)
-        print(password)
+        user_id = user["userId"]
+        my_user = self.dbSession.query(User).get(user_id)
+        my_user.password = password
+        self.dbSession.commit()
+        return "Success"
