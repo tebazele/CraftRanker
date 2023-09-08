@@ -84,7 +84,7 @@ export default {
 
 <style lang="scss" scoped>
 .bg-header {
-  background-image: url('../assets/img/header_long5.svg');
+  background-image: url('../assets/img/header_long6.jpg');
   background-position: top;
   background-size: cover;
 }

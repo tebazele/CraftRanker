@@ -50,12 +50,12 @@ def sexybeast():
 # can access the protected routes, like this '/home' one for example
 
 
-@app.route('/coursecontent', methods=(['GET']))
-@flask_login.login_required
-def home():
-    print("You are logged in")
+# @app.route('/coursecontent', methods=(['GET']))
+# @flask_login.login_required
+# def home():
+#     print("You are logged in")
 
-    return 'Home protected by @flask_login.login_required'
+#     return 'Home protected by @flask_login.login_required'
 
 
 @app.route('/videos', methods=(['GET']))
