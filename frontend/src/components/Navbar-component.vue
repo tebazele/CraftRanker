@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg bg-body-tertiary bg-header p-md-5 py-3 px-1">
     <div class="d-flex flex-column">
       <router-link :to="{ name: 'home' }">
-        <img alt="logo" src="../assets/img/crLogoSquare.svg" height="120" class="bg-transparent-2" />
+        <img alt="logo" src="../assets/img/crLogoSquare.svg" height="120" />
       </router-link>
     </div>
     <button class="navbar-toggler bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#linksdropdown"
@@ -11,6 +11,11 @@
     </button>
     <div class="collapse navbar-collapse" id="linksdropdown">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-end text-shadow">
+        <li class="nav-item mx-3 d-lg-none d-block">
+          <router-link class="text-uppercase text-primary fw-bold link" :to="{ name: 'plans' }">
+            SHOW ME HOW
+          </router-link>
+        </li>
         <li class="nav-item mx-3">
           <router-link class="text-uppercase text-dark link"
             :to="{ name: 'courseContent', query: { series: 'Essentials', module: 1 } }">
@@ -40,10 +45,12 @@
         <li v-else class="nav-item mx-3">
           <a class="text-dark text-uppercase link" href="#" @click="logout()">Logout</a>
         </li>
+
       </ul>
       <!-- TODO make purchase page and connect stripe, set up register page to be accessible only after payment confirmed -->
       <!-- <button class="btn btn-info">GET MASTERCLASSES NOW!</button> -->
     </div>
+    <button class="btn bg-turquoise text-light d-none d-lg-block elevation">Show Me How!</button>
   </nav>
 </template>
 
@@ -77,14 +84,22 @@ export default {
 
 <style lang="scss" scoped>
 .bg-header {
-  background-image: url('../assets/img/header_long2.svg');
+  background-image: url('../assets/img/header_long5.svg');
   background-position: top;
   background-size: cover;
-
 }
 
+// @media only screen and (max-width: 768px) {
+//   .bg-header {
+//     background-image: url('../assets/img/header_long3.svg');
+//     background-position: top;
+//     background-size: cover;
+
+//   }
+// }
+
 .bg-transparent {
-  background-color: rgba(247, 237, 233, 0.753) !important;
+  background-color: #d9c7af92 !important;
 }
 
 .bg-transparent-2 {
