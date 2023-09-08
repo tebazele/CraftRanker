@@ -3,7 +3,7 @@
   <div>
     <section class="row">
       <div class="col-12 text-center ">
-        <h1 class="text-dark text-uppercase">Learn from real top-1% etsy sellers</h1>
+        <h1 class="text-dark text-uppercase mt-md-3">Learn from real top-1% etsy sellers</h1>
         <h4 class="text-secondary">No guesswork. No BS. Just proven strategies for success on Etsy</h4>
       </div>
     </section>
@@ -34,8 +34,8 @@
         </div>
 
       </div>
-      <div class="col-12 col-md-4 p-3 ">
-        <img src="../assets/img/craftranker_main.jpg" class="img-fluid rounded img-height mt-5" />
+      <div class="col-12 col-md-4 p-md-3 d-flex d-md-block justify-content-center">
+        <img src="../assets/img/craftranker_main.jpg" class="img-fluid rounded img-height mt-md-5 m-3" />
 
       </div>
     </section>
@@ -148,12 +148,29 @@ export default {
   max-width: 500px;
 }
 
+@media only screen and (max-width: 768px) {
+  .text-max {
+    margin-top: 12px;
+    margin-left: 12px;
+    margin-right: 12px;
+    text-align: justify;
+  }
+}
+
 
 .img-height {
   max-height: 500px;
   width: 400px;
   object-fit: cover;
   object-position: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .img-height {
+    max-height: 400px;
+    width: 350px;
+    margin: auto auto;
+  }
 }
 
 .pos-rel {

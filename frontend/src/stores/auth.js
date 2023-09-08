@@ -1,6 +1,9 @@
 // import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import api from '../services/axiosService.js';
+// import { useToast } from 'vue-toastification'
+
+// const toast = useToast();
 
 
 
@@ -73,6 +76,7 @@ export const useAuthStore = defineStore('auth', {
         this.isProcessing = true;
         const response = await api.post('register', payload); 
         console.log(response.data);
+        // toast.success("Does this work from here?")
         this.isProcessing = false;
         this.setRegistrationStatus({
           success: true,

@@ -30,24 +30,45 @@
 import { ref } from 'vue';
 import { useAuthStore } from '../stores/auth.js';
 import { useRouter } from 'vue-router';
+import { useToast } from "vue-toastification";
 
 export default {
   setup() {
     const formData = ref({});
     const authStore = useAuthStore();
     const router = useRouter();
+    const toast = useToast();
     return {
+      toast,
       formData,
       async register() {
         try {
           const registerData = {
             ...formData.value
           }
+
           await authStore.registerNewUser(registerData)
+          toast.success("Thanks for registering! Please log in to view course content.", {
+            position: "top-right",
+            timeout: 5000,
+            closeOnClick: true,
+            pauseOnFocusLoss: true,
+            pauseOnHover: true,
+            draggable: true,
+            draggablePercent: 0.6,
+            showCloseButtonOnHover: false,
+            hideProgressBar: true,
+            closeButton: "button",
+            icon: "fas fa-rocket",
+            rtl: false
+          });
+
           formData.value = {}
-          router.push({ name: 'courseContent', query: { series: 'Essentials', module: 1 } })
+
+          router.push({ name: 'login' })
         } catch (error) {
-          console.error(error)
+          // console.error(error)
+          toast.error("Something went wrong")
         }
       }
     }
