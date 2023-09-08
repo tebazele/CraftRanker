@@ -27,7 +27,7 @@
 import { ref } from 'vue';
 import { useAuthStore } from '../stores/auth.js';
 import { useRouter } from 'vue-router';
-import { useToast } from 'vue-toastification';
+// import { useToast } from 'vue-toastification';
 
 
 export default {
@@ -35,7 +35,7 @@ export default {
     const formData = ref({});
     const authStore = useAuthStore();
     const router = useRouter();
-    const toast = useToast();
+    // const toast = useToast();
     return {
       formData,
       async login() {
@@ -45,9 +45,11 @@ export default {
           }
           // console.log(loginData);
           await authStore.authenticateUserAndSetToken(loginData);
-          toast.success("Login successful")
+          // toast.success("Login successful")
           formData.value = {}
-          router.push({ name: 'courseContent', query: { series: 'Essentials', module: 1 } })
+          if (authStore.loginToken) {
+            router.push({ name: 'courseContent', query: { series: 'Essentials', module: 1 } })
+          }
 
         } catch (error) {
           console.log(error);

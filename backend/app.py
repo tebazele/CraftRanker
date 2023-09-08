@@ -49,7 +49,7 @@ def sexybeast():
 # Only requests that have an Authorization request reader set with a valid login token
 # can access the protected routes, like this '/home' one for example
 
-
+# NOTE this is how to lock down a route with flask_login
 # @app.route('/coursecontent', methods=(['GET']))
 # @flask_login.login_required
 # def home():

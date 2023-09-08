@@ -27,7 +27,7 @@
             About Us
           </router-link>
         </li>
-        <li class="nav-item mx-3">
+        <li :class="route.path.includes('plans') ? 'd-none' : ''" class="nav-item mx-3">
           <router-link class="text-uppercase text-dark link" :to="{ name: 'contact' }">
             Contact
           </router-link>
@@ -50,13 +50,21 @@
       <!-- TODO make purchase page and connect stripe, set up register page to be accessible only after payment confirmed -->
       <!-- <button class="btn btn-info">GET MASTERCLASSES NOW!</button> -->
     </div>
-    <button class="btn bg-turquoise text-light d-none d-lg-block elevation">Show Me How!</button>
+    <div v-if="route.path.includes('plans')">
+      <button @click="goToContact()" class="btn bg-turquoise btn-info text-light d-none d-lg-block elevation"><i class="mdi
+          mdi-email"> </i> Contact
+        Us</button>
+    </div>
+    <div v-else>
+      <button @click="goToPlans()" class="btn bg-turquoise btn-info text-light d-none d-lg-block elevation">Show Me
+        How!</button>
+    </div>
   </nav>
 </template>
 
 
 <script>
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 
 import { useAuthStore } from '../stores/auth.js';
 import { computed } from 'vue';
@@ -64,17 +72,25 @@ export default {
   setup() {
     const authStore = useAuthStore();
     const router = useRouter();
+    const route = useRoute();
     return {
       authStore,
+      route,
       async logout() {
         try {
           await authStore.logout()
-          router.push({ name: 'login' })
+          router.push({ name: 'home' })
         } catch (error) {
           console.log(error);
         }
       },
-      isToken: computed(() => authStore.getIsUserLoggedIn)
+      isToken: computed(() => authStore.getIsUserLoggedIn),
+      goToPlans() {
+        router.push({ name: 'plans' })
+      },
+      goToContact() {
+        router.push({ name: 'contact' })
+      }
 
     }
   }
@@ -84,7 +100,7 @@ export default {
 
 <style lang="scss" scoped>
 .bg-header {
-  background-image: url('../assets/img/header_long6.jpg');
+  background-image: url('../assets/img/header_long7.jpg');
   background-position: top;
   background-size: cover;
 }
