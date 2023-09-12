@@ -1,9 +1,9 @@
 // import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import api from '../services/axiosService.js';
-// import { useToast } from 'vue-toastification'
+import { useToast } from 'vue-toastification'
 
-// const toast = useToast();
+const toast = useToast();
 
 
 
@@ -76,7 +76,7 @@ export const useAuthStore = defineStore('auth', {
         this.isProcessing = true;
         const response = await api.post('register', payload); 
         console.log(response.data);
-        // toast.success("Does this work from here?")
+        toast.success("Registration successful!")
         this.isProcessing = false;
         this.setRegistrationStatus({
           success: true,
@@ -89,6 +89,7 @@ export const useAuthStore = defineStore('auth', {
           this.setRegistrationStatus({
             success: false,
             message: error.response.data.message
+            
           });
         } else {
           this.setRegistrationStatus({
@@ -96,7 +97,8 @@ export const useAuthStore = defineStore('auth', {
             message: error.message
           })
         }
-        console.error(error);
+        toast.error("Something went wrong. Please try again.")
+        // console.error(error);
         }
     },
     async authenticateUserAndSetToken(payload) {
@@ -112,6 +114,7 @@ export const useAuthStore = defineStore('auth', {
           message: "Credentials accepted"         
         })
         api.defaults.headers.common['Authorization'] = res.data.token;
+        toast.success("You are logged in")
       } catch (error) {
         this.isProcessing = false;
         if (typeof error != 'undefined' && typeof error.response != 'undefined') {
@@ -125,7 +128,8 @@ export const useAuthStore = defineStore('auth', {
             message: error.message
           })
         }
-        console.error(error);
+        toast.error("Password incorrect")
+        // console.error(error);
         // console.error(error);
       }
     },
@@ -142,6 +146,7 @@ export const useAuthStore = defineStore('auth', {
         await api.post('logout');
         this.setIsProcessing(false)
         this.setLogout()
+        toast.success("You are logged out.")
       } catch (error) {
         this.setIsProcessing(false)
         if (typeof error != 'undefined' && typeof error.response != 'undefined') {
@@ -149,7 +154,8 @@ export const useAuthStore = defineStore('auth', {
         } else {
           this.setLogout();
                         }
-        console.error(error)
+        // console.error(error)
+        toast.error("Not logged out. Something went wrong.")
       }
     }
   }

@@ -1,6 +1,9 @@
 <template>
   <section class="row justify-content-center">
-    <div class="col-11 pt-5">
+    <div class="col-12 text-center">
+      <h1><i class="mdi mdi-party-popper"></i>Thank you for your purchase!</h1>
+    </div>
+    <div class="col-11 pt-3">
       <div class="m-2 p-4 card elevation-3">
         <h1>Register</h1>
         <form @submit.prevent="register()">
