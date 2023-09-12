@@ -984,7 +984,6 @@ def addVideos():
         m = v["module"]
         videoModule.addVideoObjects(ytId, n, s, m)
 
-
 addVideos()
 
 
@@ -996,6 +995,5 @@ def removeVideo():
 
 def removeAllRows():
     videoModule.removeAllVideos()
-
 
 # removeAllRows()
