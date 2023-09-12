@@ -24,9 +24,10 @@ export default {
       try {
         // NOTE go get publishable key and init an instance of Stripe
         const res = await api.get('public-keys')
-        // console.log(res.data)
+        console.log(res.data)
         // eslint-disable-next-line no-undef
         stripe = await Stripe(res.data.key);
+        console.log(stripe)
 
       } catch (error) {
         toast.error("Something went wrong")
