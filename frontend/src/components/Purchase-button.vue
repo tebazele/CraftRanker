@@ -9,7 +9,7 @@
 <script>
 // NOTE Stripe brought into project with CDN link
 // FIXME in production, make sure to change to live mode in env and use live product instead of test
-import { onMounted } from 'vue';
+// import { onMounted } from 'vue';
 
 import { useToast } from "vue-toastification";
 import api from '../services/axiosService.js';
@@ -17,22 +17,22 @@ import api from '../services/axiosService.js';
 export default {
   setup() {
     // eslint-disable-next-line no-unused-vars
-    let stripe = null;
+    // let stripe = null;
     const toast = useToast();
 
-    onMounted(async () => {
-      try {
-        // NOTE go get publishable key and init an instance of Stripe
-        const res = await api.get('public-keys')
-        console.log(res.data)
-        // eslint-disable-next-line no-undef
-        stripe = await Stripe(res.data.key);
-        console.log(stripe)
+    // onMounted(async () => {
+    //   try {
+    //     // NOTE go get publishable key and init an instance of Stripe
+    //     // const res = await api.get('public-keys')
+    //     await console.log("hello")
+    //     // eslint-disable-next-line no-undef
+    //     // stripe = await Stripe(res.data.key);
+    //     // console.log(stripe)
 
-      } catch (error) {
-        toast.error("Something went wrong")
-      }
-    })
+    //   } catch (error) {
+    //     toast.error("Something went wrong")
+    //   }
+    // })
     async function redirect() {
       try {
         const res = await api.post('create-checkout-session')
