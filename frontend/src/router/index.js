@@ -33,7 +33,7 @@ const router = createRouter({
       meta: {requiresAuth: true}
     },
     {
-      path: '/register-form/:token',
+      path: '/register-form',
       name: 'register',
       component: () => import('../views/RegisterView.vue')
     },
