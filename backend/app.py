@@ -8,20 +8,27 @@ from services.auth import Auth
 from services.videoinsert import VideoData
 from models.loginTokenResult import LoginTokenResult
 import flask
+import os
 import flask_login
-from flask import request
+from flask import request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import json
+import stripe
 
 
 app = flask.Flask(__name__)
 
-# app.app_context().push()
+workingDirectory = os.getcwd()
+configFile = os.path.join(workingDirectory, 'config.json')
+
+with open(configFile, 'r') as jsonConfig:
+    config = json.load(jsonConfig)
 
 
 # Configurations
-ALOWED_CORS_DOMAIN = 'http://127.0.0.1:5173'
-app.secret_key = 'asd;lj34asd9fa;l;3'
+ALLOWED_CORS_DOMAIN = config['allowed_cors_domain']
+app.secret_key = config['app_secret_key']
+STRIPE_KEY = config['stripe_secret_key']
 jsonClassEncoder = JsonClassEncoder()
 
 login_manager = flask_login.LoginManager()
@@ -45,6 +52,39 @@ def load_user(user_id):
 @app.route('/sexybeast')
 def sexybeast():
     return 'Jeanne'
+
+
+@app.route('/public-keys')
+def public_keys():
+    return jsonify({"key": config['stripe_public_key']})
+
+
+stripe.api_key = config['stripe_secret_key']
+
+
+@app.route('/create-checkout-session', methods=['POST'])
+def create_checkout_session():
+    secret_token = 'h7p3s3ll14gCRr3gP7g39904-dtc000'
+    prod_success_url = 'https://craftranker.jeanneallen.us/register/'+secret_token
+    prod_cancel_url = 'https://craftranker.jeanneallen.us/plans'
+    dev_success_url = 'http://127.0.0.1:5173/register/'+secret_token
+    dev_cancel_url = 'http://127.0.0.1:5173/plans'
+    session = stripe.checkout.Session.create(
+        line_items=[
+            {
+                'price': "price_1NpaPiHCtKGyoq0UKwu614bT",
+                'quantity': 1
+            }
+        ],
+        mode='payment',
+        success_url=dev_success_url,
+        cancel_url=dev_cancel_url
+    )
+    # TODO send an email about purchase
+    # send back a some sort of token and append it to the url to allow them to register so just anybody can't go to register
+# FIXME don't actually send the token back in the response, this is just a test
+    return jsonify({"sessionURL": session.url})
+
 
 # Only requests that have an Authorization request reader set with a valid login token
 # can access the protected routes, like this '/home' one for example
@@ -126,7 +166,7 @@ def sessionLogout():
 # This enable CORS, it means that this server will authorize AJAX calls from
 # other domains than the current domain where the API is running
 def add_cors_headers(response):
-    response.headers['Access-Control-Allow-Origin'] = ALOWED_CORS_DOMAIN
+    response.headers['Access-Control-Allow-Origin'] = ALLOWED_CORS_DOMAIN
     if request.method == 'OPTIONS':
         response.headers['Access-Control-Allow-Methods'] = 'DELETE, GET, POST, PUT'
         headers = request.headers.get('Access-Control-Request-Headers')

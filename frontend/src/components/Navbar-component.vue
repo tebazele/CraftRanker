@@ -27,16 +27,18 @@
             About Us
           </router-link>
         </li>
-        <li :class="route.path.includes('plans') ? 'd-none' : ''" class="nav-item mx-3">
+        <li
+          :class="route.path.includes('plans') || route.path.includes('coursecontent') || route.path.includes('register') ? 'd-none' : ''"
+          class="nav-item mx-3">
           <router-link class="text-uppercase text-dark link" :to="{ name: 'contact' }">
             Contact
           </router-link>
         </li>
-        <li class="nav-item mx-3">
+        <!-- <li class="nav-item mx-3">
           <router-link class="text-uppercase text-dark link" :to="{ name: 'register' }">
             Register
           </router-link>
-        </li>
+        </li> -->
         <li v-if="!isToken" class="nav-item mx-3">
           <router-link class="text-uppercase text-dark link" :to="{ name: 'login' }">
             Login
@@ -50,7 +52,7 @@
       <!-- TODO make purchase page and connect stripe, set up register page to be accessible only after payment confirmed -->
       <!-- <button class="btn btn-info">GET MASTERCLASSES NOW!</button> -->
     </div>
-    <div v-if="route.path.includes('plans')">
+    <div v-if="route.path.includes('plans') || route.path.includes('coursecontent') || route.path.includes('register')">
       <button @click="goToContact()" class="btn bg-turquoise btn-info text-light d-none d-lg-block elevation"><i class="mdi
           mdi-email"> </i> Contact
         Us</button>

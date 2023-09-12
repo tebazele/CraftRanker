@@ -33,16 +33,9 @@ const router = createRouter({
       meta: {requiresAuth: true}
     },
     {
-      path: '/register',
+      path: '/register/:token',
       name: 'register',
       component: () => import('../views/RegisterView.vue')
-    },
-    {
-      path: '/success',
-      name: 'success',
-      component: () => import('../views/SuccessView.vue'),
-      // FIXME set up this check based on Stripe API token
-      // meta: {requiresPurchase: true}
     },
     {
       path: '/login',

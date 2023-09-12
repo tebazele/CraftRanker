@@ -146,6 +146,7 @@ export const useAuthStore = defineStore('auth', {
         await api.post('logout');
         this.setIsProcessing(false)
         this.setLogout()
+        toast.success("You are logged out.")
       } catch (error) {
         this.setIsProcessing(false)
         if (typeof error != 'undefined' && typeof error.response != 'undefined') {
@@ -153,7 +154,8 @@ export const useAuthStore = defineStore('auth', {
         } else {
           this.setLogout();
                         }
-        console.error(error)
+        // console.error(error)
+        toast.error("Not logged out. Something went wrong.")
       }
     }
   }
