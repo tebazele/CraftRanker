@@ -2,6 +2,7 @@
 import LiteYouTubeEmbed from 'vue-lite-youtube-embed'
 import 'vue-lite-youtube-embed/style.css'
 import CheckList from '../components/Check-list.vue'
+import PurchaseButton from '../components/Purchase-button.vue';
 
 
 const offerText = [{
@@ -52,10 +53,12 @@ const offerText = [{
     </section>
     <hr class="m-4" />
     <section class="row justify-content-center text-secondary text-center">
-      <h4>Get 90+ Recorded Video Lessons to Accompany Your Book Learning</h4>
+      <h4>Get 90+ Recorded Video Lessons to Accompany Your Book Learning
+      </h4>
       <div class="col-md-4">
 
-        <button class="btn btn-info text-light bg-turquoise my-3 fs-4">Get University of Etsy Now</button>
+        <!-- <button class="btn btn-info text-light bg-turquoise my-3 fs-4">Get University of Etsy Now</button> -->
+        <PurchaseButton />
       </div>
     </section>
     <section class="row justify-content-around">
