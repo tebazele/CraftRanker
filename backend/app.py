@@ -77,12 +77,12 @@ def create_checkout_session():
             }
         ],
         mode='payment',
-        success_url=dev_success_url,
-        cancel_url=dev_cancel_url
+        success_url=prod_success_url,
+        cancel_url=prod_cancel_url
     )
     # TODO send an email about purchase
     # send back a some sort of token and append it to the url to allow them to register so just anybody can't go to register
-# FIXME don't actually send the token back in the response, this is just a test
+
     return jsonify({"sessionURL": session.url})
 
 
