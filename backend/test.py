@@ -1,10 +1,5 @@
-from datetime import datetime
-from entities.databaseSessionManager import SessionManager
-from entities.video import Video
 
-dbSession = SessionManager()
+from flask import Flask
+import os
 
-
-for instance in dbSession.select(Video):
-    print(instance.name)
-# print(dbSession)
+from time import time
