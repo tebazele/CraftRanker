@@ -69,7 +69,7 @@ stripe.api_key = config['stripe_secret_key']
 @app.route('/create-checkout-session', methods=['POST'])
 def create_checkout_session():
     secret_token = 'h7p3s3ll14gCRr3gP7g39904-dtc000'
-    prod_success_url = 'https://craftranker.jeanneallen.us/register-form'
+    prod_success_url = 'https://craftranker.jeanneallen.us/form-register'
     prod_cancel_url = 'https://craftranker.jeanneallen.us/plans'
     dev_success_url = 'http://127.0.0.1:5173/register-form/'+secret_token
     dev_cancel_url = 'http://127.0.0.1:5173/plans'
