@@ -45,11 +45,11 @@ const offerText = [{
 
 
       </div>
-      <div class="blammie text-end me-5 mt-3">
+      <!-- <div class="blammie text-end me-5 mt-3">
         <h6 class="me-5">Don't have our book?</h6>
         <button class="btn btn-outline-dark border border-warning ms-3"><a href="https://a.co/d/gP6RLVm"
             target="_blank"><i class="mdi mdi-book-arrow-right"></i> Get it on Amazon Now!</a></button>
-      </div>
+      </div> -->
     </section>
     <hr class="m-4" />
     <section class="row justify-content-center text-secondary text-center">
@@ -133,5 +133,12 @@ const offerText = [{
 
 .blammie {
   position: absolute;
+}
+
+@media only screen and (max-width: 768px) {
+  .blammie {
+    display: none;
+  }
+
 }
 </style>

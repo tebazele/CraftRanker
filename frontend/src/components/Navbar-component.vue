@@ -5,8 +5,8 @@
         <img alt="logo" src="../assets/img/crLogoSquare.svg" height="120" />
       </router-link>
     </div>
-    <button class="navbar-toggler bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#linksdropdown"
-      aria-controls="linksdropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler bg-transparent ms-auto" type="button" data-bs-toggle="collapse"
+      data-bs-target="#linksdropdown" aria-controls="linksdropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="linksdropdown">

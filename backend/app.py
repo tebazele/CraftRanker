@@ -26,8 +26,8 @@ with open(configFile, 'r') as jsonConfig:
 
 
 # Configurations
-ALLOWED_CORS_DOMAIN = config['allowed_cors_domain']
-app.secret_key = config['app_secret_key']
+ALLOWED_CORS_DOMAIN = 'http://localhost:5173'
+app.secret_key = 'asd;lj34asd9fa;l;3'
 STRIPE_KEY = config['stripe_secret_key']
 jsonClassEncoder = JsonClassEncoder()
 
@@ -35,6 +35,10 @@ login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
 app.session_interface = CustomSessionInterface()
 # End of Configurations section
+
+print(app.secret_key)
+print(STRIPE_KEY)
+print(ALLOWED_CORS_DOMAIN)
 
 authModule = Auth()
 videoModule = VideoData()
