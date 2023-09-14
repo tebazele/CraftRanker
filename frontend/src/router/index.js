@@ -33,12 +33,12 @@ const router = createRouter({
       meta: {requiresAuth: true}
     },
     {
-      path: '/form-register/:token',
+      path: '/register',
       name: 'register',
       component: () => import('../views/RegisterView.vue')
     },
     {
-      path: '/form-login',
+      path: '/login',
       name: 'login',
       component: () => import('../views/LoginView.vue')
     },
