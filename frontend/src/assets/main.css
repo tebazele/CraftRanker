@@ -9,6 +9,10 @@ body {
   color: #ed7022;
 }
 
+.text-turquoise {
+  color: rgb(53, 191, 177);
+}
+
 .bg-orange {
   background-color: #ed7022;
 }
@@ -17,8 +21,44 @@ body {
   background-color: rgb(53, 191, 177);
 }
 
-.text-turquoise {
-  color: rgb(53, 191, 177);
+.bg-lime {
+  background-color: rgb(117, 215, 57);
+}
+
+.bg-pink {
+  background-color: rgb(236, 141, 217);
+}
+
+.bg-light-blue {
+  background-color: lightblue;
+}
+
+.bg-light-purple {
+  background-color: rgb(197, 120, 236);
+}
+
+.bg-bonus {
+  background-color: rgb(247, 224, 91);
+}
+
+.bg-light-orange {
+  background-color: #f6a23a;
+}
+
+.bg-dark-blue {
+  background-color: darkblue;
+}
+
+.bg-red {
+  background-color: rgb(248, 36, 54);
+}
+
+.bg-dark-green {
+  background-color: rgb(2, 113, 2);
+}
+
+.bg-dark-purple {
+  background-color: rgb(40, 0, 59);
 }
 
 .elevation {

@@ -10,7 +10,7 @@
       <div class="col-md-10 col-12 card">
 
         <section class="row justify-content-around">
-          <div class="col-4">
+          <div class="col-md-4">
             <div class="m-3">
 
               <button class="btn btn-secondary btn-w mt-4 mb-1" type="button" data-bs-toggle="collapse"
@@ -70,9 +70,47 @@
                 </ul>
 
               </div>
+              <div v-if="whichModActive == 'Essentials1'" class="mt-4">
+                <a class="btn btn-light bg-light-orange btn-w mt-3 mb-1"
+                  href="../../public/worksheets/Etsy101_Worksheet.pdf">Download Worksheet</a>
+              </div>
+              <div v-else-if="whichModActive == 'Essentials2'" class="mt-4">
+                <a class="btn btn-light bg-lime btn-w mt-3 mb-1" href="../../public/worksheets/Etsy102_Worksheet.pdf"
+                  target="_blank">Download Worksheet</a>
+              </div>
+              <div v-else-if="whichModActive == 'Essentials3'" class="mt-4">
+                <a class="btn btn-light bg-pink btn-w mt-3 mb-1" href="../../public/worksheets/Etsy103+104_Worksheet.pdf"
+                  target="_blank">Download Worksheet</a>
+              </div>
+              <div v-else-if="whichModActive == 'Essentials4'" class="mt-4">
+                <a class="btn btn-light bg-light-blue btn-w mt-3 mb-1"
+                  href="../../public/worksheets/Etsy105_Worksheet.pdf" target="_blank">Download Worksheet</a>
+              </div>
+              <div v-else-if="whichModActive == 'Essentials5'" class="mt-4">
+                <a class="btn btn-light bg-light-purple btn-w mt-3 mb-1"
+                  href="../../public/worksheets/Etsy106_Worksheet.pdf" target="_blank">Download Worksheet</a>
+              </div>
+              <div v-else-if="whichModActive == 'Essentials6'" class="mt-4">
+                <a class="btn btn-light bg-bonus btn-w mt-3 mb-1" href="../../public/worksheets/Etsy107_Worksheet.pdf"
+                  target="_blank">Download Worksheet</a>
+              </div>
+              <div v-else-if="whichModActive == 'Expert1'" class="mt-4">
+                <a class="btn btn-dark bg-orange btn-w mt-3 mb-1" href="../../public/worksheets/Etsy201_Worksheet.pdf"
+                  target="_blank">Download Worksheet</a>
+              </div>
+              <div v-else-if="whichModActive == 'Expert2'" class="mt-4">
+                <a class="btn btn-dark bg-dark-blue btn-w mt-3 mb-1" href="../../public/worksheets/Etsy202_Worksheet.pdf"
+                  target="_blank">Download Worksheet</a>
+              </div>
+              <div v-else-if="whichModActive == 'Expert4'" class="mt-4">
+                <a class="btn btn-dark bg-dark-green btn-w mt-3 mb-1" href="../../public/worksheets/Etsy204_Worksheet.pdf"
+                  target="_blank">Download Worksheet</a>
+              </div>
+
             </div>
+
           </div>
-          <div class="col-7 p-3 ">
+          <div class="col-md-7 p-3 ">
             <div v-for="v in whichMod" :key="v.id" class="m-3">
               <VideoCard :video="v" />
 
