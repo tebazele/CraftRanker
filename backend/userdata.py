@@ -20,7 +20,7 @@ for dict in reader:
     un = dict["username"]
     crAt = dict["createdAt"]
     fn = dict["fullName"]
-    pswd = dict["password "]
+    pswd = dict["password"]
     userModule.addUserObjects(un, crAt, fn, pswd)
 
 # print(type(myList[0]["createdAt"]))
