@@ -81,7 +81,7 @@ export default {
       async logout() {
         try {
           await authStore.logout()
-          router.push({ name: 'login-form' })
+          router.push({ name: 'login' })
         } catch (error) {
           console.log(error);
         }
