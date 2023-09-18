@@ -1,6 +1,6 @@
 <template>
   <div>
-    This is the reset token view
+    Please check your email for an email from jeanne@craftranker.com with password reset instructions :)
 
   </div>
 </template>

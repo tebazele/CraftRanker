@@ -48,7 +48,7 @@ def verified(token, user):
     user = authModule.verify_reset_token(token, appSecret)
     if not user:
         # FIXME redirect to page that says your password reset link has expired go to login
-        return redirect('http://localhost:5173', code=302)
+        return redirect('https://craftranker.jeanneallen.us', code=302)
         # print(user)
     # domain = ''
     # if debug:
@@ -59,7 +59,8 @@ def verified(token, user):
         print(str)
         # if debug, return hardcoded url
         # return redirect(domain + '/login', code=302)
-        return redirect('http://localhost:5173/login-form', code=302)
+        return redirect('https://craftranker.jeanneallen.us/login-form', code=302)
+        # ', code=302)
     # else return relative url
 
     return render_template('reset_verified.html')

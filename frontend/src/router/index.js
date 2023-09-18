@@ -50,9 +50,6 @@ const router = createRouter({
     {
       path: '/reset_password',
       name: 'resetPassword',
-      // beforeEnter: (to, from, next) => {
-        
-      // }
       component: () => import('../views/ResetTokenView.vue')
     },
     {

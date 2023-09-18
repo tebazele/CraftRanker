@@ -23,14 +23,14 @@
 <script>
 import { ref } from 'vue';
 import { useAuthStore } from '../stores/auth.js';
-// import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 
 
 export default {
   setup() {
     const formData = ref({})
     const authStore = useAuthStore();
-    // const router = useRouter();
+    const router = useRouter();
     return {
       formData,
       async resetPassword() {
@@ -39,7 +39,7 @@ export default {
             ...formData.value
           }
           await authStore.resetPassword(body)
-          // router.push({ name: 'resetPassword', params: { token: 4 } })
+          router.push({ name: 'resetPassword' })
         } catch (error) {
           console.error(error)
         }
