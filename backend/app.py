@@ -10,7 +10,7 @@ from models.loginTokenResult import LoginTokenResult
 import flask
 import os
 import flask_login
-from flask import request, jsonify
+from flask import request, jsonify, url_for, abort
 from flask_sqlalchemy import SQLAlchemy
 import json
 import stripe
@@ -64,6 +64,7 @@ def public_keys():
 
 
 stripe.api_key = config['stripe_secret_key']
+endpoint_secret = 'whsec_029d3af66e4cecba3ae446513094861b1ee553929a26bedf404dc14c6d7e85a0'
 
 # FIXME figure out some way to make register route more secure
 
@@ -73,8 +74,8 @@ def create_checkout_session():
     secret_token = 'h7p3s3ll14gCRr3gP7g39904-dtc000'
     prod_success_url = 'https://craftranker.jeanneallen.us/form-register'
     prod_cancel_url = 'https://craftranker.jeanneallen.us/plans'
-    dev_success_url = 'http://127.0.0.1:5173/form-register'
-    dev_cancel_url = 'http://127.0.0.1:5173/plans'
+    dev_success_url = 'http://localhost:5173/form-register'
+    dev_cancel_url = 'http://localhost/plans'
     session = stripe.checkout.Session.create(
         line_items=[
             {
@@ -83,14 +84,58 @@ def create_checkout_session():
             }
         ],
         mode='payment',
-        success_url=prod_success_url,
-        cancel_url=prod_cancel_url
+        success_url=dev_success_url + '?session_id={CHECKOUT_SESSION_ID}',
+        cancel_url=dev_cancel_url
     )
+    print("[THIS IS THE SESSION ID]", session.id)
+
+    # with app.app_context():
+    #     from services.mail import purchase
+    #     purchase()
+
     # TODO send an email about purchase
     # send back a some sort of token and append it to the url to allow them to register so just anybody can't go to register
 
-    return jsonify({"sessionURL": session.url})
+    return jsonify({"sessionURL": session.url, "sessionID": session.id})
 
+
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    if request.content_length > 1024 * 1024:
+        print('REQUEST TOO BIG')
+        abort(400)
+    event = None
+
+    payload = request.get_data()
+    # print(payload)
+
+    try:
+        event = json.loads(payload)
+    except:
+        print('⚠️  Webhook error while parsing basic request.' + str(e))
+        return jsonify(success=False)
+
+    if endpoint_secret:
+        sig_header = request.headers.get('stripe-signature')
+    #    sig_header = request.environ.get('HTTP_STRIPE_SIGNATURE')
+        try:
+            event = stripe.Webhook.construct_event(
+                payload, sig_header, endpoint_secret
+            )
+        except stripe.error.SignatureVerificationError as e:
+            print('⚠️  Webhook signature verification failed.' + str(e))
+            return jsonify(success=False)
+
+    if event and event['type'] == 'checkout.session.completed':
+        session = event['data']['object']
+        print(session)
+        if session['payment_status'] == "paid":
+            email = session['customer_details']['email']
+            print('[EMAIL]', email)
+            with app.app_context():
+                from services.mail import purchase
+                purchase(email)
+    return jsonify(success=True)
 
 # Only requests that have an Authorization request reader set with a valid login token
 # can access the protected routes, like this '/home' one for example

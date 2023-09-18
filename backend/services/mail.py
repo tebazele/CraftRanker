@@ -38,7 +38,6 @@ def reset():
                   recipients=[email],
                   html=render_template('reset_email.html', user=our_user["fullName"], token=reset_token))
     mail.send(msg)
-    return jsonify(status_code=200, content={"message": "email has been sent"})
 
 
 @current_app.route('/verified/<token>/<user>', methods=(['GET', 'POST']))
@@ -63,3 +62,13 @@ def verified(token, user):
     # else return relative url
 
     return render_template('reset_verified.html')
+
+
+# @current_app.route('/purchase', methods=(['GET', 'POST']))
+def purchase(email):
+    # print('[EMAIL]', email)
+    msg = Message("Thank you for your purchase of CraftRanker's University of Etsy Masterclasses",
+                  recipients=[email],
+                  html=render_template('purchase_confirm.html'))
+    mail.send(msg)
+    return jsonify(status_code=200, content={"message": "email has been sent"})

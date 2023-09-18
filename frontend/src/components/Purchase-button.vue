@@ -13,12 +13,14 @@
 
 import { useToast } from "vue-toastification";
 import api from '../services/axiosService.js';
+// import { useAuthStore } from '../stores/auth.js';
 
 export default {
   setup() {
     // eslint-disable-next-line no-unused-vars
     // let stripe = null;
     const toast = useToast();
+    // const authStore = useAuthStore();
 
     // onMounted(async () => {
     //   try {
@@ -36,7 +38,10 @@ export default {
     async function redirect() {
       try {
         const res = await api.post('create-checkout-session')
+
         // console.log(res.data)
+
+
         window.location.href = res.data.sessionURL
       } catch (error) {
         toast.error("Something went wrong when redirecting to Stripe")

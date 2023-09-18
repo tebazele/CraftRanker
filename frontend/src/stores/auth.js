@@ -14,7 +14,9 @@ export const useAuthStore = defineStore('auth', {
     registrationProcessMessage: '',
     isProcessing: false,
     loginToken: '',
-    loginProcessMessage: ''
+    loginProcessMessage: '',
+    customerSessionURL: '',
+    customerSessionID: ''
   }),
   getters: {
     getRegistrationProcessSuccess: (state) => {

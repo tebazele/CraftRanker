@@ -41,6 +41,10 @@ export default {
     const authStore = useAuthStore();
     const router = useRouter();
     const toast = useToast();
+
+    // onMounted(() => {
+    //   console.log(authStore.customerSessionID, authStore.customerSessionURL)
+    // })
     return {
       toast,
       formData,
