@@ -71,11 +71,11 @@ endpoint_secret = 'whsec_029d3af66e4cecba3ae446513094861b1ee553929a26bedf404dc14
 
 @app.route('/create-checkout-session', methods=['POST'])
 def create_checkout_session():
-    secret_token = 'h7p3s3ll14gCRr3gP7g39904-dtc000'
-    prod_success_url = 'https://craftranker.jeanneallen.us/form-register'
-    prod_cancel_url = 'https://craftranker.jeanneallen.us/plans'
-    dev_success_url = 'http://localhost:5173/form-register'
-    dev_cancel_url = 'http://localhost/plans'
+    # secret_token = 'h7p3s3ll14gCRr3gP7g39904-dtc000'
+    prod_url = 'https://craftranker.jeanneallen.us'
+
+    dev_url = 'http://localhost:5173'
+
     session = stripe.checkout.Session.create(
         line_items=[
             {
@@ -84,19 +84,13 @@ def create_checkout_session():
             }
         ],
         mode='payment',
-        success_url=dev_success_url + '?session_id={CHECKOUT_SESSION_ID}',
-        cancel_url=dev_cancel_url
+        success_url=prod_url +
+        '/form-register?session_id={CHECKOUT_SESSION_ID}',
+        cancel_url=prod_url + '/plans'
     )
-    print("[THIS IS THE SESSION ID]", session.id)
+    # print("[THIS IS THE SESSION ID]", session.id)
 
-    # with app.app_context():
-    #     from services.mail import purchase
-    #     purchase()
-
-    # TODO send an email about purchase
-    # send back a some sort of token and append it to the url to allow them to register so just anybody can't go to register
-
-    return jsonify({"sessionURL": session.url, "sessionID": session.id})
+    return jsonify({"sessionURL": session.url})
 
 
 @app.route('/webhook', methods=['POST'])
