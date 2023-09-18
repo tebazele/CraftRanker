@@ -1,14 +1,25 @@
 <!DOCTYPE html>
-<title>Flask Password Reset</title>
+<head>
+  <title>Flask Password Reset</title>
+  <style>
+    .content {
+      display: flex;
+      justify-content: center;
+      margin-top: 200px;
+    }
+  </style>
+</head>
 <nav>
   <h1>Flask Password Reset</h1>
 </nav>
 <section class="content">
-  <h1>Reset Password</h1>
+  <div>
+    <h1>Reset Password</h1>
 
-  <form method="post">
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" required />
-    <input type="submit" value="Reset Password" />
-  </form>
+    <form method="post">
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" required />
+      <input type="submit" value="Reset Password" />
+    </form>
+  </div>
 </section>

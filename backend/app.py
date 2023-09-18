@@ -105,7 +105,6 @@ def webhook():
         print('REQUEST TOO BIG')
         abort(400)
     event = None
-
     payload = request.get_data()
     # print(payload)
 
@@ -129,13 +128,16 @@ def webhook():
     if event and event['type'] == 'checkout.session.completed':
         session = event['data']['object']
         print(session)
+
         if session['payment_status'] == "paid":
             email = session['customer_details']['email']
             print('[EMAIL]', email)
             with app.app_context():
                 from services.mail import purchase
                 purchase(email)
-    return jsonify(success=True)
+            return jsonify(success=True)
+        else:
+            return jsonify(success=False)
 
 # Only requests that have an Authorization request reader set with a valid login token
 # can access the protected routes, like this '/home' one for example

@@ -32,12 +32,13 @@ def reset():
     our_user = authModule.GetUserByEmail(email)
     reset_token = authModule.getResetToken(
         our_user["username"], current_app.config['SECRET_KEY'])
-    # print("This is our token", reset_token)
+    print("This is our email", email)
 
     msg = Message("Reset Your Password for University of Etsy Courses, CraftRanker",
                   recipients=[email],
                   html=render_template('reset_email.html', user=our_user["fullName"], token=reset_token))
     mail.send(msg)
+    return jsonify(status_code=200, content={"message": "email has been sent"})
 
 
 @current_app.route('/verified/<token>/<user>', methods=(['GET', 'POST']))
@@ -47,7 +48,7 @@ def verified(token, user):
     user = authModule.verify_reset_token(token, appSecret)
     if not user:
         # FIXME redirect to page that says your password reset link has expired go to login
-        return redirect('http://127.0.0.1:5173', code=302)
+        return redirect('http://localhost:5173', code=302)
         # print(user)
     # domain = ''
     # if debug:
@@ -58,7 +59,7 @@ def verified(token, user):
         print(str)
         # if debug, return hardcoded url
         # return redirect(domain + '/login', code=302)
-        return redirect('http://127.0.0.1:5173/login', code=302)
+        return redirect('http://localhost:5173/login-form', code=302)
     # else return relative url
 
     return render_template('reset_verified.html')
