@@ -17,6 +17,7 @@ class User(db.Model, flask_login.mixins.UserMixin):
     createdAt = db.Column(db.DateTime, nullable=False)
     password = db.Column(db.String(120), unique=False, nullable=False)
     fullName = db.Column(db.String(80), unique=False, nullable=False)
+    paid = db.Column(db.Boolean, default=True)
 
     def get_id(self):
         return chr(self.userId)
