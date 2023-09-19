@@ -72,7 +72,7 @@ endpoint_secret = 'whsec_029d3af66e4cecba3ae446513094861b1ee553929a26bedf404dc14
 @app.route('/create-checkout-session', methods=['POST'])
 def create_checkout_session():
     # secret_token = 'h7p3s3ll14gCRr3gP7g39904-dtc000'
-    prod_url = 'https://craftranker.jeanneallen.us'
+    prod_url = 'https://craftranker.com'
 
     dev_url = 'http://localhost:5173'
 
