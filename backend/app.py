@@ -79,7 +79,8 @@ def create_checkout_session():
     session = stripe.checkout.Session.create(
         line_items=[
             {
-                'price': "price_1NpaPiHCtKGyoq0UKwu614bT",
+                # Live product
+                'price': "price_1NpZVkHCtKGyoq0UsNXxtu59",
                 'quantity': 1
             }
         ],
