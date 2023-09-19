@@ -109,7 +109,8 @@ const offerText = [{
           <p><span class="fw-bold">The content is yours forever</span> (and we'll update it to reflect the latest
             best-practices in Etsy as we go!) No subscriptions, no re-bills, no hidden fees. Just helpful content to help
             you grow.</p>
-          <p>Click <a class="text-turquoise" href="#">HERE</a> to download the Course Syllabus!</p>
+          <p>Click <a class="text-turquoise" href="../../public/worksheets/Masterclass_Syllabi.pdf"
+              target="_blank">HERE</a> to download the Course Syllabus!</p>
 
         </div>
 
