@@ -24,3 +24,4 @@ systemctl restart craftranker
 # with certbot automatically renewing our nginx certificates.
 #cp nginx.jeanneallen.us /etc/nginx/sites-available/jeanneallen.us
 
+chown www-data:www-data /var/www/CraftRanker/backend/instance/db.sqlite

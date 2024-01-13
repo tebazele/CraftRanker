@@ -41,8 +41,9 @@ export default {
       async login() {
         try {
           const loginData = {
-            ...formData.value
-          }
+		email: formData.value.email.toLowerCase(),
+		password: formData.value.password
+	       }
           // console.log(loginData);
           await authStore.authenticateUserAndSetToken(loginData);
           // toast.success("Login successful")
