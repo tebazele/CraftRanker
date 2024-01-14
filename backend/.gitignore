@@ -7,3 +7,7 @@ videodata.py
 
 # UserDataCSV.csv
 *.csv 
+
+tmp/
+
+root@droplet

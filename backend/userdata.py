@@ -4,7 +4,7 @@ from datetime import datetime
 
 userModule = UserData()
 
-myFile = open('user_data_9_2023.csv', mode='r', encoding='utf-8-sig')
+myFile = open('addUser.csv', mode='r', encoding='utf-8-sig')
 reader = csv.DictReader(myFile)
 myList = list()
 for dict in reader:
