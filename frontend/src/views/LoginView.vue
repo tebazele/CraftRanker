@@ -39,11 +39,13 @@ export default {
     return {
       formData,
       async login() {
+
         try {
+          console.log(formData.value)
           const loginData = {
-		email: formData.value.email.toLowerCase(),
-		password: formData.value.password
-	       }
+            email: formData.value.email.toLowerCase(),
+            password: formData.value.password
+          }
           // console.log(loginData);
           await authStore.authenticateUserAndSetToken(loginData);
           // toast.success("Login successful")

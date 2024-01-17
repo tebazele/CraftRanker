@@ -7,6 +7,8 @@ class UserData():
     dbSession = SessionManager().session
 
     def addUserObjects(self, username, createdAt, fullName, password):
+        print(password)
+        username = username.lower()
         # encrypt passwords
         encryptedPassword = bcrypt.hashpw(
             password.encode('utf-8'), bcrypt.gensalt())
