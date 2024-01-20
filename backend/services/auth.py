@@ -33,6 +33,7 @@ class Auth():
         # If the error var still set as None, if is None proceed to the user creation
         # But if there is an error set, returns this error to the browser
         if error is None:
+            username = username.lower().strip()
             newUser = User(username=username, password=password, createdAt=datetime.now(),
                            fullName=fullName)
             self.dbSession.add(newUser)

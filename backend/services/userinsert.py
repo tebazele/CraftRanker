@@ -8,7 +8,8 @@ class UserData():
 
     def addUserObjects(self, username, createdAt, fullName, password):
         print(password)
-        username = username.lower()
+        username = username.lower().strip()
+        print(username)
         # encrypt passwords
         encryptedPassword = bcrypt.hashpw(
             password.encode('utf-8'), bcrypt.gensalt())
