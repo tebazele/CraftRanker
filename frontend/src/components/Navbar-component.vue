@@ -58,7 +58,7 @@
         Us</button>
     </div>
     <div v-else>
-      <button @click="goToPlans()" class="btn bg-turquoise btn-info text-light d-none d-lg-block elevation">Show Me
+      <button id="show-me-button" @click="goToPlans()" class="btn bg-turquoise btn-info text-light d-none d-lg-block elevation">Show Me
         How!</button>
     </div>
   </nav>
